@@ -146,3 +146,158 @@ A. Datum Corporation prévoit d'ouvrir trois succursales en Amérique du Nord 
 | Portland      | 172.16.23.0/24       | 172.16.55.0/24         |
 
 > **Remarque :** Ce plan garantit que chaque type de connexion dispose de suffisamment d'adresses et que les plages sont distinctes pour les connexions filaires et sans fil.
+# Definição de DirectAccess
+
+O DirectAccess é um recurso do Windows Server que permite que computadores clientes estabeleçam automaticamente e de forma transparente uma conexão segura com a rede corporativa pela Internet, sem a necessidade de ação do usuário ou de uma VPN tradicional. O DirectAccess utiliza protocolos como IPv6, IPsec e tunelamento para fornecer acesso remoto contínuo aos recursos internos, mantendo a segurança e o gerenciamento centralizado dos dispositivos, mesmo quando estão fora do escritório.
+
+# Roteamento (Routing)
+
+O roteamento é o processo de encaminhar pacotes de dados entre redes diferentes, permitindo a comunicação entre dispositivos que não estão na mesma sub-rede. Em redes IP, os roteadores analisam o endereço de destino dos pacotes e determinam o melhor caminho para entregá-los ao destino final.
+
+## Tipos de roteamento
+
+- **Roteamento estático:** As rotas são configuradas manualmente pelo administrador. É simples, mas não se adapta automaticamente a mudanças na topologia da rede.
+- **Roteamento dinâmico:** Os roteadores trocam informações entre si usando protocolos de roteamento, como RIP, OSPF ou BGP, ajustando as rotas automaticamente conforme necessário.
+
+## Protocolos de roteamento comuns
+
+- **RIP (Routing Information Protocol):** Protocolo simples, adequado para redes pequenas.
+- **OSPF (Open Shortest Path First):** Protocolo mais avançado, usado em redes de médio e grande porte.
+- **BGP (Border Gateway Protocol):** Utilizado para roteamento entre grandes redes, como na Internet.
+
+## Exemplo de configuração de rota estática no Windows Server
+
+```powershell
+# Adiciona uma rota estática para a rede 192.168.10.0/24 via gateway 192.168.1.1
+route add 192.168.10.0 mask 255.255.255.0 192.168.1.1
+```
+
+> O roteamento é fundamental para conectar diferentes segmentos de rede e garantir o fluxo eficiente de dados em ambientes corporativos.
+
+# RADIUS Server e Proxy
+
+## O que é um servidor RADIUS?
+
+O RADIUS (Remote Authentication Dial-In User Service) é um protocolo utilizado para autenticação, autorização e contabilização (AAA) de usuários que acessam redes, como VPNs, Wi-Fi corporativo e conexões dial-up. No Windows Server, o serviço de RADIUS é implementado pelo NPS (Network Policy Server).
+
+- **Autenticação:** Verifica as credenciais do usuário.
+- **Autorização:** Define os privilégios de acesso.
+- **Contabilização:** Registra informações sobre o uso da rede.
+
+## Funcionamento do RADIUS
+
+1. O cliente (por exemplo, um ponto de acesso Wi-Fi) encaminha as credenciais do usuário para o servidor RADIUS.
+2. O servidor RADIUS valida as credenciais e retorna uma resposta de aceitação ou rejeição.
+3. Se aceito, o usuário recebe acesso à rede conforme as políticas definidas.
+
+## RADIUS Proxy
+
+Um RADIUS Proxy encaminha solicitações de autenticação para outros servidores RADIUS, permitindo centralizar ou distribuir a autenticação entre diferentes domínios ou organizações.
+
+- **Cenários comuns:**
+	- Autenticação de usuários de diferentes domínios.
+	- Roaming entre organizações (ex: eduroam).
+	- Balanceamento de carga entre múltiplos servidores RADIUS.
+
+## Exemplo de configuração básica no Windows Server
+
+1. Instale o serviço NPS (Network Policy Server).
+2. Configure clientes RADIUS (ex: pontos de acesso).
+3. Defina políticas de rede para autenticação.
+4. (Opcional) Configure o NPS como proxy para encaminhar solicitações a outros servidores RADIUS.
+
+> O uso de RADIUS aumenta a segurança e o controle sobre o acesso à rede, sendo essencial em ambientes corporativos e educacionais.
+
+# Network Policy Server (NPS) – Definição
+
+O Network Policy Server (NPS) é o componente do Windows Server responsável por implementar políticas de autenticação, autorização e contabilização de acesso à rede, atuando como servidor RADIUS. O NPS permite centralizar o gerenciamento das políticas de acesso para conexões VPN, Wi-Fi corporativo, autenticação 802.1X e outros métodos de acesso remoto.
+
+## Principais funções do NPS
+
+- **Servidor RADIUS:** Autentica e autoriza solicitações de acesso à rede.
+- **Proxy RADIUS:** Encaminha solicitações para outros servidores RADIUS.
+- **Gerenciamento de políticas:** Define regras baseadas em grupos, horários, localizações, tipos de conexão e outros critérios.
+- **Contabilização:** Registra logs detalhados sobre tentativas de acesso e uso da rede.
+
+## Benefícios
+
+- Centralização das regras de acesso à rede.
+- Integração com o Active Directory para autenticação de usuários.
+- Suporte a autenticação forte (EAP, PEAP, certificados).
+- Auditoria e relatórios de acesso.
+
+> O NPS é essencial para ambientes que exigem controle rigoroso e seguro sobre quem pode acessar a rede e sob quais condições.
+
+# Certificados
+
+CA (Certificate Authority / Autoridade Certificadora):
+É uma entidade confiável responsável por emitir, validar e revogar certificados digitais. Ela garante que o certificado realmente pertence à entidade (usuário, computador, servidor) que diz possuir.
+
+PKI (Public Key Infrastructure / Infraestrutura de Chave Pública):
+É o conjunto de tecnologias, políticas e procedimentos que permitem a criação, gerenciamento, distribuição, uso, armazenamento e revogação de certificados digitais e chaves criptográficas. A PKI utiliza CAs para garantir a confiança nas identidades digitais.
+
+Certificado Digital:
+É um arquivo eletrônico que associa uma chave pública a uma identidade (pessoa, computador, serviço), permitindo autenticação e comunicação segura.
+
+Chave Pública e Chave Privada:
+São pares de chaves criptográficas. A chave pública é distribuída e pode ser compartilhada; a chave privada é mantida em segredo pelo proprietário.
+
+Esses conceitos são fundamentais para autenticação forte, como em redes Wi-Fi corporativas usando EAP-TLS, onde o NPS valida certificados emitidos por uma CA confiável dentro de uma PKI.
+
+# RRAS, Routing e NAT no Windows Server
+
+## O que é RRAS?
+
+O RRAS (Routing and Remote Access Service) é um serviço do Windows Server que permite que o servidor atue como roteador, servidor VPN e forneça acesso remoto seguro à rede corporativa. Com o RRAS, é possível implementar roteamento entre sub-redes, NAT (Network Address Translation) e conexões VPN para usuários remotos.
+
+## Funcionalidades principais do RRAS
+
+- **Roteamento IP:** Permite que o servidor encaminhe pacotes entre diferentes redes/sub-redes.
+- **NAT (Network Address Translation):** Permite que múltiplos dispositivos em uma rede interna acessem a Internet usando um único endereço IP público.
+- **Servidor VPN:** Oferece acesso remoto seguro à rede via protocolos como PPTP, L2TP, SSTP e IKEv2.
+- **Acesso Dial-up:** Suporte a conexões discadas (menos comum atualmente).
+
+## Configuração básica de roteamento com RRAS
+
+1. Instale o serviço RRAS via Gerenciador de Servidores ou PowerShell.
+2. Configure o RRAS para atuar como roteador (roteamento LAN-LAN) ou servidor VPN.
+3. Adicione interfaces de rede correspondentes às sub-redes que deseja rotear.
+4. (Opcional) Configure rotas estáticas ou dinâmicas conforme necessário.
+
+## NAT com RRAS
+
+O NAT permite que dispositivos de uma rede privada acessem recursos externos (como a Internet) usando um único endereço IP público. O RRAS pode ser configurado para atuar como gateway NAT:
+
+- **Interface pública:** Conectada à Internet (IP público).
+- **Interface privada:** Conectada à rede interna (IP privado).
+- O RRAS traduz os endereços IP internos para o endereço público ao encaminhar pacotes para a Internet.
+
+### Exemplo de configuração de NAT no RRAS
+
+1. No Gerenciador de Servidores, adicione a função "Serviço de Acesso Remoto" e selecione "Roteamento e Acesso Remoto".
+2. Abra o console RRAS, clique com o botão direito no servidor e escolha "Configurar e habilitar RRAS".
+3. Selecione "NAT personalizado" ou "NAT com acesso à Internet".
+4. Defina a interface conectada à Internet como pública e habilite NAT nela.
+5. Defina a interface interna como privada.
+
+> O RRAS é uma solução versátil para roteamento, NAT e acesso remoto em ambientes Windows Server, facilitando a integração de redes e o acesso seguro de usuários remotos.
+
+
+# Web Application Proxy – Definição
+
+O Web Application Proxy (WAP) é uma função do Windows Server que atua como um gateway reverso, permitindo que usuários externos acessem aplicações web internas de forma segura. Ele faz parte do serviço de Acesso Remoto e é frequentemente utilizado para publicar aplicações como o Exchange, SharePoint ou portais internos, protegendo-os com autenticação adicional, como o Active Directory Federation Services (AD FS).
+
+## Principais funções do Web Application Proxy
+
+- **Publicação segura de aplicações web internas para usuários externos**
+- **Autenticação prévia** dos usuários antes de permitir o acesso às aplicações
+- **Integração com AD FS** para autenticação baseada em claims e Single Sign-On (SSO)
+- **Proteção contra ameaças externas** ao não expor diretamente os servidores internos
+
+## Benefícios
+
+- Permite acesso remoto seguro a aplicações corporativas
+- Suporte a autenticação multifator e políticas de acesso condicional
+- Reduz a superfície de ataque da rede interna
+
+> O Web Application Proxy é essencial para organizações que precisam fornecer acesso remoto seguro a aplicações web internas, mantendo o controle e a segurança dos recursos corporativos.
