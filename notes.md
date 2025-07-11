@@ -301,3 +301,20 @@ O Web Application Proxy (WAP) é uma função do Windows Server que atua como um
 - Reduz a superfície de ataque da rede interna
 
 > O Web Application Proxy é essencial para organizações que precisam fornecer acesso remoto seguro a aplicações web internas, mantendo o controle e a segurança dos recursos corporativos.
+
+# DFS (Distributed File System) – Definição
+
+O DFS (Distributed File System) é um conjunto de serviços do Windows Server que permite organizar, gerenciar e compartilhar pastas e arquivos distribuídos em múltiplos servidores de forma centralizada e transparente para os usuários. Com o DFS, é possível criar um namespace unificado, facilitando o acesso e a redundância dos dados.
+
+## Principais componentes do DFS
+
+- **DFS Namespaces:** Permite criar uma estrutura lógica de pastas (namespace) que pode apontar para compartilhamentos em diferentes servidores, apresentando um caminho único para os usuários.
+- **DFS Replication:** Sincroniza automaticamente arquivos e pastas entre servidores, garantindo alta disponibilidade e tolerância a falhas.
+
+## Benefícios
+
+- Acesso simplificado a arquivos, independentemente da localização física.
+- Redundância e alta disponibilidade por meio de replicação.
+- Balanceamento de carga e otimização do acesso em ambientes distribuídos.
+
+> O DFS é amplamente utilizado para centralizar o acesso a arquivos em organizações com múltiplas filiais ou servidores, melhorando a resiliência e a experiência do usuário.
