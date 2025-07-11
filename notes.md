@@ -437,3 +437,22 @@ NVGRE (Network Virtualization using Generic Routing Encapsulation) é uma tecnol
 - Suporta ambientes multi-tenant com isolamento seguro.
 
 > O NVGRE é utilizado principalmente em ambientes de virtualização e nuvem, sendo uma das tecnologias base para redes definidas por software (SDN) no Windows Server.
+
+# SLB (Software Load Balancer) – Definição
+
+O SLB (Software Load Balancer) é um componente do Windows Server e do SDN que distribui automaticamente o tráfego de rede entre múltiplos servidores ou serviços, garantindo alta disponibilidade e escalabilidade das aplicações. Diferente dos balanceadores de carga tradicionais baseados em hardware, o SLB é implementado por software e integrado à infraestrutura virtualizada.
+
+## Principais características do SLB
+
+- **Balanceamento de carga Layer 4 (TCP/UDP):** Distribui conexões de rede de forma eficiente entre instâncias de serviço.
+- **Alta disponibilidade:** Redireciona o tráfego automaticamente em caso de falha de um servidor.
+- **Escalabilidade dinâmica:** Permite adicionar ou remover servidores sem interromper o serviço.
+- **Integração com SDN:** Gerenciado centralmente pelo controlador SDN, facilitando automação e orquestração.
+
+## Benefícios
+
+- Reduz pontos únicos de falha e melhora a resiliência das aplicações.
+- Otimiza o uso dos recursos de rede e servidores.
+- Facilita a implantação de aplicações em ambientes de nuvem e datacenter.
+
+> O SLB é essencial para garantir desempenho, disponibilidade e flexibilidade em ambientes modernos baseados em Windows Server e redes definidas por software.
