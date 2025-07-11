@@ -318,3 +318,122 @@ O DFS (Distributed File System) é um conjunto de serviços do Windows Server qu
 - Balanceamento de carga e otimização do acesso em ambientes distribuídos.
 
 > O DFS é amplamente utilizado para centralizar o acesso a arquivos em organizações com múltiplas filiais ou servidores, melhorando a resiliência e a experiência do usuário.
+
+# BranchCache – Definição
+
+O BranchCache é um recurso do Windows Server que otimiza o uso da largura de banda WAN em filiais (branch offices) ao armazenar em cache localmente o conteúdo acessado de servidores centrais. Quando um usuário em uma filial solicita um arquivo ou conteúdo de um servidor central, o BranchCache armazena uma cópia localmente. Solicitações subsequentes ao mesmo conteúdo são atendidas a partir do cache local, reduzindo o tráfego WAN e acelerando o acesso.
+
+## Modos de operação
+
+- **Modo Distribuído:** O cache é armazenado nos próprios computadores clientes da filial.
+- **Modo Hospedado:** O cache é centralizado em um servidor dedicado na filial.
+
+## Benefícios
+
+- Reduz o consumo de banda WAN entre matriz e filiais.
+- Melhora o tempo de resposta para acesso a arquivos e conteúdos repetidos.
+- Transparente para o usuário final e fácil de gerenciar via políticas de grupo.
+
+> O BranchCache é ideal para organizações com múltiplas filiais que acessam frequentemente arquivos ou aplicações hospedadas em datacenters centrais.
+
+# NIC Timing – Definição
+
+NIC Timing refere-se ao tempo e à sincronização envolvidos nas operações de uma placa de interface de rede (Network Interface Card – NIC). Isso inclui o tempo necessário para processar pacotes, responder a sinais de rede e coordenar a transmissão e recepção de dados. Um bom gerenciamento de timing na NIC é essencial para garantir baixa latência, alta taxa de transferência e comunicação eficiente entre dispositivos de rede.
+
+## Aspectos importantes do NIC Timing
+
+- **Latência:** Tempo entre o envio de um pacote e sua recepção.
+- **Buffering:** Gerenciamento de filas de pacotes para evitar perda de dados.
+- **Clock interno:** Sincronização precisa para transmissão de dados em redes de alta velocidade.
+- **Offloading:** Algumas NICs realizam tarefas como checksum ou segmentação para otimizar o desempenho e reduzir a carga da CPU.
+
+> O ajuste e monitoramento do timing da NIC são especialmente importantes em ambientes de data center, virtualização e aplicações sensíveis à latência, como VoIP e trading financeiro.
+
+
+# SMB 3.1.1 – Definição
+
+O SMB (Server Message Block) 3.1.1 é a versão mais recente do protocolo SMB, introduzida no Windows 10 e Windows Server 2016. Ele é utilizado para compartilhamento de arquivos, impressoras e outros recursos de rede entre computadores Windows e sistemas compatíveis.
+
+## Principais recursos do SMB 3.1.1
+
+- **Segurança aprimorada:** Suporte a criptografia AES-128-GCM e AES-128-CCM para proteger dados em trânsito.
+- **Pré-autenticação de integridade:** Garante que a sessão SMB não seja comprometida antes da autenticação, protegendo contra ataques de downgrade.
+- **Negociação segura:** Utiliza algoritmos mais robustos para negociar capacidades entre cliente e servidor.
+- **Desempenho otimizado:** Suporte a múltiplos canais, compressão de dados e melhorias em ambientes de virtualização e datacenter.
+
+## Benefícios
+
+- Maior proteção contra ataques de interceptação e manipulação de dados.
+- Compatibilidade com recursos avançados de armazenamento e alta disponibilidade.
+- Melhor desempenho em redes modernas.
+
+> O SMB 3.1.1 é recomendado para ambientes que exigem alta segurança e desempenho no compartilhamento de arquivos e recursos em redes Windows.
+
+# RSS (Receive Side Scaling) no SMB
+
+O RSS (Receive Side Scaling) é uma tecnologia de otimização de rede suportada pelo Windows Server e utilizada pelo protocolo SMB para melhorar o desempenho do tráfego de rede em servidores com múltiplos processadores ou núcleos.
+
+## Como funciona o RSS
+
+O RSS distribui o processamento dos pacotes de rede recebidos entre vários núcleos de CPU, evitando que todo o tráfego seja tratado por um único núcleo. Isso reduz gargalos, melhora a escalabilidade e aumenta a taxa de transferência em ambientes de alto desempenho, como servidores de arquivos que utilizam SMB 3.x.
+
+## Benefícios do RSS no SMB
+
+- **Melhor uso dos recursos do servidor:** Distribui a carga de trabalho de rede entre múltiplos núcleos.
+- **Aumento do throughput:** Permite maior volume de dados transferidos simultaneamente.
+- **Redução de latência:** Minimiza atrasos no processamento de pacotes SMB.
+
+> O RSS é especialmente importante em servidores com múltiplas conexões SMB, como ambientes de virtualização, clusters e datacenters, garantindo desempenho consistente e eficiente no acesso a arquivos e recursos compartilhados.
+
+# SR-IOV – Definição
+
+SR-IOV (Single Root I/O Virtualization) é uma tecnologia que permite que uma única placa de interface de rede física (NIC) seja compartilhada diretamente entre múltiplas máquinas virtuais (VMs), proporcionando acesso quase nativo ao hardware. Com SR-IOV, a NIC é dividida em múltiplas interfaces virtuais chamadas de Virtual Functions (VFs), que podem ser atribuídas individualmente às VMs.
+
+## Benefícios do SR-IOV
+
+- **Desempenho elevado:** Reduz a sobrecarga de virtualização, oferecendo baixa latência e alta taxa de transferência.
+- **Menor uso da CPU:** O tráfego de rede é processado diretamente pela NIC, minimizando a intervenção do hypervisor.
+- **Isolamento:** Cada VM tem sua própria interface virtual, aumentando a segurança e a separação do tráfego.
+
+## Cenários de uso
+
+SR-IOV é amplamente utilizado em ambientes de virtualização que exigem alto desempenho de rede, como datacenters, servidores de arquivos e aplicações sensíveis à latência.
+
+> O suporte a SR-IOV depende tanto do hardware da NIC quanto do hypervisor e do sistema operacional utilizados.
+# SDN (Software Defined Networking) – Definição
+
+SDN (Software Defined Networking) é uma abordagem de rede que separa o plano de controle (responsável pelas decisões de roteamento e políticas) do plano de dados (responsável pelo encaminhamento efetivo dos pacotes). Em vez de depender de dispositivos de rede tradicionais com controle distribuído, o SDN centraliza a inteligência de rede em um controlador de software, permitindo configuração, automação e gerenciamento dinâmico da infraestrutura de rede.
+
+## Principais características do SDN
+
+- **Centralização do controle:** Um controlador SDN gerencia toda a rede, facilitando a aplicação de políticas e mudanças de configuração.
+- **Programabilidade:** A rede pode ser configurada e automatizada via APIs, scripts ou ferramentas de orquestração.
+- **Flexibilidade:** Permite rápida adaptação a novas demandas, como segmentação de rede, provisionamento de serviços e balanceamento de carga.
+- **Visibilidade:** Proporciona monitoramento centralizado e detalhado do tráfego e do desempenho da rede.
+
+## Benefícios
+
+- Redução da complexidade operacional e dos custos de gerenciamento.
+- Maior agilidade para implementar novas políticas e serviços.
+- Facilidade de integração com ambientes de nuvem, virtualização e automação.
+
+> O SDN é fundamental em datacenters modernos, redes corporativas e ambientes de nuvem, permitindo redes mais ágeis, seguras e eficientes.
+
+# NVGRE – Definição
+
+NVGRE (Network Virtualization using Generic Routing Encapsulation) é uma tecnologia de virtualização de rede desenvolvida pela Microsoft para permitir a criação de redes virtuais sobre uma infraestrutura física compartilhada. Utilizando o protocolo GRE para encapsular pacotes, o NVGRE permite que múltiplas redes virtuais coexistam de forma isolada, mesmo utilizando o mesmo espaço de endereçamento IP.
+
+## Principais características do NVGRE
+
+- **Encapsulamento GRE:** Os pacotes de rede das máquinas virtuais são encapsulados em pacotes GRE, permitindo o transporte transparente sobre a rede física.
+- **Isolamento de redes:** Permite que diferentes clientes ou departamentos utilizem o mesmo intervalo de endereços IP sem conflitos.
+- **Escalabilidade:** Facilita a criação de milhares de redes virtuais em ambientes de nuvem e datacenter.
+- **Integração com SDN:** Pode ser gerenciado por controladores SDN para automação e orquestração de redes virtuais.
+
+## Benefícios
+
+- Simplifica a mobilidade de máquinas virtuais entre hosts físicos.
+- Reduz a complexidade de configuração de VLANs tradicionais.
+- Suporta ambientes multi-tenant com isolamento seguro.
+
+> O NVGRE é utilizado principalmente em ambientes de virtualização e nuvem, sendo uma das tecnologias base para redes definidas por software (SDN) no Windows Server.
